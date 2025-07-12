@@ -74,6 +74,7 @@ class Test extends ConsoleCommand
         $output->writeln('Host: ' . $settings->redisHost->getValue());
         $output->writeln('Port: ' . $settings->redisPort->getValue());
         $output->writeln('Timeout: ' . $settings->redisTimeout->getValue());
+        $output->writeln('Username: ' . $settings->redisUsername->getValue());
         $output->writeln('Password: ' . $settings->redisPassword->getValue());
         $output->writeln('Database: ' . $settings->redisDatabase->getValue());
         $output->writeln('RedisBackendType: ' . $settings->getRedisType());

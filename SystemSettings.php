@@ -40,6 +40,9 @@ class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
     public $redisDatabase;
 
     /** @var Setting */
+    public $redisUsername;
+
+    /** @var Setting */
     public $redisPassword;
 
     /** @var Setting */
@@ -87,6 +90,7 @@ class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
         $this->redisPort = $this->createRedisPortSetting();
         $this->redisTimeout = $this->createRedisTimeoutSetting();
         $this->redisDatabase = $this->createRedisDatabaseSetting();
+        $this->redisUsername = $this->createRedisUsernameSetting();
         $this->redisPassword = $this->createRedisPasswordSetting();
         $this->queueEnabled = $this->createQueueEnabledSetting();
         $this->numQueueWorkers = $this->createNumberOfQueueWorkerSetting();
@@ -226,6 +230,19 @@ class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
         return $numQueueWorkers;
     }
 
+    private function createRedisUsernameSetting()
+    {
+        return $this->makeSetting('redisUsername', $default = 'default', FieldConfig::TYPE_STRING, function (FieldConfig $field) {
+            $field->title = Piwik::translate('QueuedTracking_RedisUsernameFieldTitle');
+            $field->condition = 'backend=="redis"';
+            $field->uiControl = FieldConfig::UI_CONTROL_TEXT;
+            $field->uiControlAttributes = array('size' => 30);
+            $field->inlineHelp = Piwik::translate('QueuedTracking_RedisUsernameFieldHelp') . '</br>';
+            $field->validators[] = new CharacterLength(null, 30);
+        });
+    }
+
+
     private function createRedisPasswordSetting()
     {
         return $this->makeSetting('redisPassword', $default = '', FieldConfig::TYPE_STRING, function (FieldConfig $field) {
@@ -234,7 +251,7 @@ class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
             $field->uiControl = FieldConfig::UI_CONTROL_PASSWORD;
             $field->uiControlAttributes = array('size' => 128);
             $field->inlineHelp = Piwik::translate('QueuedTracking_RedisPasswordFieldHelp') . '</br>';
-            $field->validators[] = new CharacterLength(null, 128);
+            // $field->validators[] = new CharacterLength(null, 128);
         });
     }
 

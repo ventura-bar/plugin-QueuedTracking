@@ -16,6 +16,8 @@
         "AvailableRedisBackendTypeStandAlone": "Stand-alone",
         "AvailableRedisBackendTypeSentinel": "Sentinel",
         "AvailableRedisBackendTypeCluster": "Cluster",
+        "RedisUsernameFieldTitle": "Redis username",
+        "RedisUsernameFieldHelp": "Username set on the Redis server, if any. If not set, the plugin will use the default user",
         "RedisPasswordFieldTitle": "Redis password",
         "RedisPasswordFieldHelp": "Password set on the Redis server, if any. Redis can be instructed to require a password before allowing clients to execute commands.",
         "RedisDatabaseFieldTitle": "Redis database",
